@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Ocorrências de Alunos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .occurrence-list {
+            margin-top: 20px;
+        }
+
+        .occurrence-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .occurrence-item h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .occurrence-item p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .date {
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Registro de Ocorrências de Alunos</h1>
+
+    <form id="occurrenceForm">
+        <label for="studentName">Nome do Aluno:</label>
+        <input type="text" id="studentName" placeholder="Digite o nome do aluno" required>
+
+        <label for="date">Data da Ocorrência:</label>
+        <input type="date" id="date" required>
+
+        <label for="description">Descrição da Ocorrência:</label>
+        <textarea id="description" placeholder="Descreva a ocorrência" rows="4" required></textarea>
+
+        <button type="submit">Adicionar Ocorrência</button>
+    </form>
+
+    <div class="occurrence-list" id="occurrenceList">
+        <!-- Ocorrências adicionadas aparecerão aqui -->
+    </div>
+</div>
+
+<script>
+    document.getElementById('occurrenceForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Coletando valores dos campos de entrada
+        const studentName = document.getElementById('studentName').value;
+        const date = document.getElementById('date').value;
+        const description = document.getElementById('description').value;
+
+        // Criando o item da ocorrência
+        const occurrenceItem = document.createElement('div');
+        occurrenceItem.classList.add('occurrence-item');
+
+        // Adicionando conteúdo ao item da ocorrência
+        occurrenceItem.innerHTML = `
+            <h3>${studentName}</h3>
+            <p class="date">Data: ${new Date(date).toLocaleDateString('pt-BR')}</p>
+            <p>${description}</p>
+        `;
+
+        // Adicionando a ocorrência à lista
+        document.getElementById('occurrenceList').appendChild(occurrenceItem);
+
+        // Limpando os campos de entrada
+        document.getElementById('studentName').value = '';
+        document.getElementById('date').value = '';
+        document.getElementById('description').value = '';
+    });
+</script>
+
+</body>
+</html>
+
